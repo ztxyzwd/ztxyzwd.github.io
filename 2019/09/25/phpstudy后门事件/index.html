@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-
-
-
-
-
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
@@ -26,7 +21,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    version: '7.4.0',
+    version: '7.4.2',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
@@ -55,12 +50,12 @@
   };
 </script>
 
-  <meta name="description" content="phpstudy后门批量检测及利用漏洞检测9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。 检测脚本： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# -*-">
+  <meta name="description" content="phpstudy后门批量检测及利用漏洞检测9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。检测脚本：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# -*- c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="phpstudy后门事件">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/phpstudy后门事件/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="phpstudy后门批量检测及利用漏洞检测9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。 检测脚本： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# -*-">
+<meta property="og:site_name" content="drag0n">
+<meta property="og:description" content="phpstudy后门批量检测及利用漏洞检测9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。检测脚本：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# -*- c">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/09/25/phpstudy后门事件/1.png">
 <meta property="og:image" content="http://yoursite.com/2019/09/25/phpstudy后门事件/2.png">
@@ -69,9 +64,10 @@
 <meta property="og:updated_time" content="2019-09-25T09:32:36.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="phpstudy后门事件">
-<meta name="twitter:description" content="phpstudy后门批量检测及利用漏洞检测9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。 检测脚本： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# -*-">
+<meta name="twitter:description" content="phpstudy后门批量检测及利用漏洞检测9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。检测脚本：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# -*- c">
 <meta name="twitter:image" content="http://yoursite.com/2019/09/25/phpstudy后门事件/1.png">
-  <link rel="canonical" href="http://yoursite.com/2019/09/25/phpstudy后门事件/">
+
+<link rel="canonical" href="http://yoursite.com/2019/09/25/phpstudy后门事件/">
 
 
 <script id="page-configurations">
@@ -85,7 +81,7 @@
   };
 </script>
 
-  <title>phpstudy后门事件 | Hexo</title>
+  <title>phpstudy后门事件 | drag0n</title>
   
 
 
@@ -107,7 +103,6 @@
   .use-motion .post-body,
   .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -121,29 +116,29 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">drag0n</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -151,31 +146,17 @@
 <nav class="site-nav">
   
   <ul id="menu" class="menu">
-      
-      
-      
-        
         <li class="menu-item menu-item-home">
-      
-    
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
-      
-      
-      
-        
         <li class="menu-item menu-item-archives">
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
   </ul>
-
-    
 
 </nav>
 </div>
@@ -188,33 +169,33 @@
   </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content">
             
 
-  <div id="posts" class="posts-expand">
-      <article itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block post">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/phpstudy后门事件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="drag0n">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">phpstudy后门事件
-
-          
+        <h1 class="post-title" itemprop="name headline">
+          phpstudy后门事件
         </h1>
 
         <div class="post-meta">
@@ -223,18 +204,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-
-              
-                
               
 
               <time title="创建时间：2019-09-25 17:31:14 / 修改时间：17:32:36" itemprop="dateCreated datePublished" datetime="2019-09-25T17:31:14+08:00">2019-09-25</time>
             </span>
-          
-            
-
-            
-          
 
           
 
@@ -247,9 +220,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="phpstudy后门批量检测及利用"><a href="#phpstudy后门批量检测及利用" class="headerlink" title="phpstudy后门批量检测及利用"></a>phpstudy后门批量检测及利用</h2><h4 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h4><p>9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。</p>
-<p><strong>检测脚本：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf8 -*-</span><br><span class="line">#__author__=&apos;pcat@chamd5.org&apos;</span><br><span class="line">#__blog__=&apos;http://pcat.cc&apos;</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">import string</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def strings(file) :</span><br><span class="line">    chars = string.printable[:94]</span><br><span class="line">    shortestReturnChar = 4</span><br><span class="line">    regExp = &apos;[%s]&#123;%d,&#125;&apos; % (chars, shortestReturnChar)</span><br><span class="line">    pattern = re.compile(regExp)</span><br><span class="line">    with open(file, &apos;rb&apos;) as f:</span><br><span class="line">        return pattern.findall(f.read())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def grep(lines,pattern):</span><br><span class="line">    for line in lines:</span><br><span class="line">        if pattern in line:</span><br><span class="line">            yield line</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def pcheck(filename):</span><br><span class="line">    # trojan feature</span><br><span class="line">    trojan=&apos;@eval&apos;</span><br><span class="line">    # just check dll file</span><br><span class="line">    if filename.endswith(&apos;.dll&apos;):        </span><br><span class="line">        lines=strings(filename)</span><br><span class="line">        try:</span><br><span class="line">            grep(lines,trojan).next()</span><br><span class="line">        except:</span><br><span class="line">            return</span><br><span class="line">        print &apos;=== &#123;0&#125; ===&apos;.format(filename)</span><br><span class="line">        for line in grep(lines,trojan):</span><br><span class="line">            print line</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def foo():</span><br><span class="line">    # . stand for current directory</span><br><span class="line">    for path, dirs, files in os.walk(&quot;.&quot;, topdown=False):</span><br><span class="line">        for name in files:</span><br><span class="line">            pcheck(os.path.join(path, name))</span><br><span class="line">        for name in dirs:</span><br><span class="line">            pcheck(os.path.join(path, name))</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    foo()</span><br></pre></td></tr></table></figure>
+        <h2 id="phpstudy后门批量检测及利用"><a href="#phpstudy后门批量检测及利用" class="headerlink" title="phpstudy后门批量检测及利用"></a>phpstudy后门批量检测及利用</h2><h4 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h4><p>9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。</p><p><strong>检测脚本：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf8 -*-</span><br><span class="line">#__author__=&apos;pcat@chamd5.org&apos;</span><br><span class="line">#__blog__=&apos;http://pcat.cc&apos;</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">import string</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def strings(file) :</span><br><span class="line">    chars = string.printable[:94]</span><br><span class="line">    shortestReturnChar = 4</span><br><span class="line">    regExp = &apos;[%s]&#123;%d,&#125;&apos; % (chars, shortestReturnChar)</span><br><span class="line">    pattern = re.compile(regExp)</span><br><span class="line">    with open(file, &apos;rb&apos;) as f:</span><br><span class="line">        return pattern.findall(f.read())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def grep(lines,pattern):</span><br><span class="line">    for line in lines:</span><br><span class="line">        if pattern in line:</span><br><span class="line">            yield line</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def pcheck(filename):</span><br><span class="line">    # trojan feature</span><br><span class="line">    trojan=&apos;@eval&apos;</span><br><span class="line">    # just check dll file</span><br><span class="line">    if filename.endswith(&apos;.dll&apos;):        </span><br><span class="line">        lines=strings(filename)</span><br><span class="line">        try:</span><br><span class="line">            grep(lines,trojan).next()</span><br><span class="line">        except:</span><br><span class="line">            return</span><br><span class="line">        print &apos;=== &#123;0&#125; ===&apos;.format(filename)</span><br><span class="line">        for line in grep(lines,trojan):</span><br><span class="line">            print line</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def foo():</span><br><span class="line">    # . stand for current directory</span><br><span class="line">    for path, dirs, files in os.walk(&quot;.&quot;, topdown=False):</span><br><span class="line">        for name in files:</span><br><span class="line">            pcheck(os.path.join(path, name))</span><br><span class="line">        for name in dirs:</span><br><span class="line">            pcheck(os.path.join(path, name))</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    foo()</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
 
 <p>将脚本放在phpstudy根目录可递归检测根目录下所有文件。</p>
 <p><img src="/2019/09/25/phpstudy后门事件/1.png" alt></p>
@@ -270,8 +243,6 @@
     
     
     
-        
-      
 
       <footer class="post-footer">
 
@@ -279,27 +250,22 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
                 <a href="/2019/10/12/一次有趣的mssql注入/" rel="prev" title="一次有趣的mssql注入">
                   一次有趣的mssql注入 <i class="fa fa-chevron-right"></i>
                 </a>
-              
             </div>
           </div>
-        
       </footer>
     
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
   </div>
 
@@ -310,21 +276,14 @@
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
   <aside class="sidebar">
     <div class="sidebar-inner">
-        
-        
-        
-        
-      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -338,26 +297,27 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#phpstudy后门批量检测及利用"><span class="nav-number">1.</span> <span class="nav-text">phpstudy后门批量检测及利用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞检测"><span class="nav-number">1.0.1.</span> <span class="nav-text">漏洞检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞利用"><span class="nav-number">1.0.2.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#批量检测exp"><span class="nav-number">1.0.3.</span> <span class="nav-text">批量检测exp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#交互shell"><span class="nav-number">1.0.4.</span> <span class="nav-text">交互shell</span></a></li></ol></li></ol></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
+  <img class="site-author-image" itemprop="image" alt=""
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name"></p>
   <div class="site-description" itemprop="description"></div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        
           <a href="/archives/">
         
           <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
-    
   </nav>
+</div>
 
 
 
@@ -371,17 +331,24 @@
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder"></span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.0</div>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
 
         
 
@@ -402,21 +369,16 @@
   </div>
 
   
-
-
-  <script src="/lib/anime.min.js?v=3.1.0"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
-<script src="/js/schemes/muse.js?v=7.4.0"></script>
-<script src="/js/next-boot.js?v=7.4.0"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
   
-
-
-
 
 
 
