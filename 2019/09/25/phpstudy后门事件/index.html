@@ -3,8 +3,34 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #FFFFFF; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 3.9.0">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -54,7 +80,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="phpstudy后门事件">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/phpstudy后门事件/index.html">
-<meta property="og:site_name" content="drag0n">
+<meta property="og:site_name" content="drag0n&#39;s blog">
 <meta property="og:description" content="phpstudy后门批量检测及利用漏洞检测9月20号得知，phpstudy软件程序包自带PHP的php_xmlrpc.dll模块隐藏有后门。除了反向连接木马之外，还可以正向执行任意代码。检测脚本：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152# -*- c">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/09/25/phpstudy后门事件/1.png">
@@ -81,7 +107,7 @@
   };
 </script>
 
-  <title>phpstudy后门事件 | drag0n</title>
+  <title>phpstudy后门事件 | drag0n's blog</title>
   
 
 
@@ -127,10 +153,11 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">drag0n</span>
+        <span class="site-title">drag0n's blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+        <p class="site-subtitle">长路漫漫，唯剑作伴~~~</p>
   </div>
 
   <div class="site-nav-toggle">
@@ -149,6 +176,11 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -187,11 +219,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="长路漫漫，唯剑作伴~~~">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="drag0n">
+      <meta itemprop="name" content="drag0n's blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -243,6 +275,15 @@
     
     
     
+	
+	<div>
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	</div>
+	
 
       <footer class="post-footer">
 
@@ -305,7 +346,7 @@
   <img class="site-author-image" itemprop="image" alt=""
     src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name"></p>
-  <div class="site-description" itemprop="description"></div>
+  <div class="site-description" itemprop="description">长路漫漫，唯剑作伴~~~</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -339,6 +380,8 @@
       <div class="footer-inner">
         
 
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 <div class="copyright">
   
   &copy; 
@@ -348,11 +391,20 @@
   </span>
   <span class="author" itemprop="copyrightHolder"></span>
 </div>
+
+<!--
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
   </div>
+-->
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
 
         
 
@@ -407,5 +459,9 @@
 
   
 
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
 </body>
 </html>
