@@ -208,6 +208,148 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/01/XSS打cookie拿shell过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="长路漫漫，唯剑作伴~~~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drag0n's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/01/XSS打cookie拿shell过程/" class="post-title-link" itemprop="url">XSS打cookie拿shell过程</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-01 11:50:18" itemprop="dateCreated datePublished" datetime="2019-12-01T11:50:18+08:00">2019-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-07 15:02:06" itemprop="dateModified" datetime="2019-12-07T15:02:06+08:00">2019-12-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>闲来无事，回顾一下自己曾经测试的漏洞，静下心来，慢慢沉淀。</p><h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p>访问站点时，发现一处留言，在其中插入xss平台的代码</p><p><img src="/2019/12/01/XSS打cookie拿shell过程/1.png" alt="1"></p><p>漫长的等待后，成功获取到cookie</p><p><img src="/2019/12/01/XSS打cookie拿shell过程/2.png" alt="2"></p><p>通过修改cookie成功进入管理后台</p><p><img src="/2019/12/01/XSS打cookie拿shell过程/3.png" alt="3"></p><p>在后台网站配置界面发现允许上传.cer文件</p><p><img src="/2019/12/01/XSS打cookie拿shell过程/4.png" alt="4"></p><p>找到一处上传点，成功上传cer图片马</p><p><img src="/2019/12/01/XSS打cookie拿shell过程/5.png" alt="5"></p><p>配合iis6.0解析漏洞，成功获取到权限</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/01/XSS打cookie拿shell过程/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/初识csrf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="长路漫漫，唯剑作伴~~~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="drag0n's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/18/初识csrf/" class="post-title-link" itemprop="url">初识csrf</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-18 14:00:20" itemprop="dateCreated datePublished" datetime="2019-11-18T14:00:20+08:00">2019-11-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-07 15:01:49" itemprop="dateModified" datetime="2019-12-07T15:01:49+08:00">2019-12-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>测试seacms后台添加管理员CSRF漏洞</p><p><img src="/2019/11/18/初识csrf/1.png" alt="img"></p><p>抓到添加管理员请求包</p><p><img src="/2019/11/18/初识csrf/2.png" alt="img"></p><p>生成POC</p><p><img src="/2019/11/18/初识csrf/3.png" alt="img"></p><p>将poc复制在本地环境上</p><p><img src="/2019/11/18/初识csrf/4.png" alt="img"></p><p>目标机在登陆后台的情况下访问我的poc</p><p><img src="/2019/11/18/初识csrf/5.png" alt="img"></p><p>成功添加csrf管理用户</p><p><img src="/2019/11/18/初识csrf/6.png" alt="img"></p>
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/ssrf探索/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -608,7 +750,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -662,7 +804,7 @@
 </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.4k字</span>
+  <span class="post-count">博客全站共5.7k字</span>
 </div>
 
         

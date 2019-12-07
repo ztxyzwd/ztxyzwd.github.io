@@ -1172,7 +1172,7 @@ img:hover {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #78f73e;
+  background: #ffd7ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1564,6 +1564,16 @@ img:hover {
 }
 .use-motion .collection-header {
   opacity: 0;
+}
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3;
+}
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
 }
 .posts-collapse {
   margin-left: 55px;
